@@ -1,6 +1,7 @@
 # Platform data storage
 .db/
 .logs/
+.audit-db/
 
 # NServiceBus LearningTransport storage directory
 .learningtransport/
