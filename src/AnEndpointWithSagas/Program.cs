@@ -8,6 +8,11 @@ var host = Host.CreateDefaultBuilder()
 
         endpointConfiguration.AuditSagaStateChanges("Particular.ServiceControl");
 
+        endpointConfiguration
+            .Recoverability()
+                .Immediate(i => i.NumberOfRetries(0))
+                .Delayed(d => d.NumberOfRetries(0));
+
         endpointConfiguration.UseTransport<LearningTransport>();
         endpointConfiguration.UsePersistence<LearningPersistence>();
         endpointConfiguration.AuditProcessedMessagesTo("audit");

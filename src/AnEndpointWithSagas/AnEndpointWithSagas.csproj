@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -11,6 +11,10 @@
 		<PackageReference Include="NServiceBus" Version="7.7.3" />
 		<PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.1.0" />
 		<PackageReference Include="NServiceBus.SagaAudit" Version="3.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Messages\Messages.csproj" />
 	</ItemGroup>
 
 </Project>
