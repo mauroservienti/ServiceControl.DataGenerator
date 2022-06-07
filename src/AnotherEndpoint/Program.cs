@@ -1,8 +1,5 @@
-﻿using Messages;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using NServiceBus;
-
-var numberOfConversationsToGenerate = 100;
 
 var host = Host.CreateDefaultBuilder()
     .UseNServiceBus(hostBuilderContext =>
