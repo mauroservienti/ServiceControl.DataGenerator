@@ -8,25 +8,32 @@ namespace AnEndpointWithSagas
         IHandleMessages<CompleteASaga>,
         IHandleTimeouts<ATimeout>
     {
+        void MaybeItFails()
+        {
+            var rnd = new Random();
+            var number = rnd.Next(0, 15);
+            if (number == 6)
+            {
+                throw new InvalidOperationException("Oooops, random error");
+            }
+        }
+
         public Task Handle(Kickoff message, IMessageHandlerContext context)
         {
+            MaybeItFails();
+
             return RequestTimeout<ATimeout>(context, TimeSpan.FromSeconds(10));
         }
 
         public Task Handle(CompleteASaga message, IMessageHandlerContext context)
         {
             MarkAsComplete();
-            return Task.CompletedTask;
+            return context.Publish<ASagaCompleted>(e => e.SomeId = Data.SomeId);
         }
 
         public Task Timeout(ATimeout state, IMessageHandlerContext context)
         {
-            var rnd = new Random();
-            var number = rnd.Next(0, 10);
-            if(number == 6)
-            {
-                throw new InvalidOperationException("Oooops, random error");
-            }
+            MaybeItFails();
 
             return ReplyToOriginator(context, new ReplyFromASaga() { SomeId = Data.SomeId });
         }
