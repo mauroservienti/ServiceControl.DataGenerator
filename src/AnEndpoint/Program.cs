@@ -2,12 +2,14 @@
 using Microsoft.Extensions.Hosting;
 using NServiceBus;
 
-var numberOfConversationsToGenerate = 100;
+var numberOfConversationsToGenerate = 1000;
 
 var host = Host.CreateDefaultBuilder()
     .UseNServiceBus(hostBuilderContext =>
     {
         var endpointConfiguration = new EndpointConfiguration("AnEndpoint");
+        endpointConfiguration.EnableInstallers();
+
         endpointConfiguration.OnEndpointStarted(session => 
         {
             var tasks = new List<Task>();
@@ -18,13 +20,13 @@ var host = Host.CreateDefaultBuilder()
             return Task.WhenAll(tasks);
         });
 
-        var transport = endpointConfiguration.UseTransport<LearningTransport>();
-        transport.Routing()
-            .RouteToEndpoint(typeof(Kickoff), "AnEndpointWithSagas");
+        var routingSettings = endpointConfiguration.UseTransport(new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost"));
+        routingSettings.RouteToEndpoint(typeof(Kickoff), "AnEndpointWithSagas");
 
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.SendFailedMessagesTo("error");
-        
+        endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
+
         return endpointConfiguration;
     })
     .Build();
