@@ -13,7 +13,7 @@ var host = Host.CreateDefaultBuilder()
                 .Immediate(i => i.NumberOfRetries(0))
                 .Delayed(d => d.NumberOfRetries(0));
 
-        endpointConfiguration.UseTransport(new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost"));
+        endpointConfiguration.ApplyCommonTransportConfiguration();
         endpointConfiguration.UsePersistence<LearningPersistence>();
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.SendFailedMessagesTo("error");

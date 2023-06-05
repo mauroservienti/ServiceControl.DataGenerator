@@ -7,7 +7,7 @@ var host = Host.CreateDefaultBuilder()
         var endpointConfiguration = new EndpointConfiguration("AnotherEndpoint");
         endpointConfiguration.EnableInstallers();
         
-        endpointConfiguration.UseTransport(new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost"));
+        endpointConfiguration.ApplyCommonTransportConfiguration();
 
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.SendFailedMessagesTo("error");

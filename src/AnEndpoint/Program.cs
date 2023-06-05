@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using NServiceBus;
 
-var numberOfConversationsToGenerate = 1000;
+var numberOfConversationsToGenerate = 100;
 
 var host = Host.CreateDefaultBuilder()
     .UseNServiceBus(hostBuilderContext =>
@@ -20,7 +20,7 @@ var host = Host.CreateDefaultBuilder()
             return Task.WhenAll(tasks);
         });
 
-        var routingSettings = endpointConfiguration.UseTransport(new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost"));
+        var routingSettings = endpointConfiguration.ApplyCommonTransportConfiguration();
         routingSettings.RouteToEndpoint(typeof(Kickoff), "AnEndpointWithSagas");
 
         endpointConfiguration.AuditProcessedMessagesTo("audit");
