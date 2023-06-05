@@ -12,6 +12,7 @@ var host = Host.CreateDefaultBuilder()
         endpointConfiguration.AuditProcessedMessagesTo("audit");
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
+        endpointConfiguration.ReportCustomChecksTo("Particular.ServiceControl");
 
         return endpointConfiguration;
     })
