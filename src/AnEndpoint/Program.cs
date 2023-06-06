@@ -10,7 +10,7 @@ var host = Host.CreateDefaultBuilder()
         var endpointConfiguration = new EndpointConfiguration("AnEndpoint");
         endpointConfiguration.EnableInstallers();
 
-        endpointConfiguration.OnEndpointStarted(session => 
+        endpointConfiguration.OnEndpointStarted(session =>
         {
             var tasks = new List<Task>();
             for (int i = 0; i < numberOfConversationsToGenerate; i++)
@@ -23,9 +23,7 @@ var host = Host.CreateDefaultBuilder()
         var routingSettings = endpointConfiguration.ApplyCommonTransportConfiguration();
         routingSettings.RouteToEndpoint(typeof(Kickoff), "AnEndpointWithSagas");
 
-        endpointConfiguration.AuditProcessedMessagesTo("audit");
-        endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
+        endpointConfiguration.ApplyCommonPlatformConfiguration();
 
         return endpointConfiguration;
     })

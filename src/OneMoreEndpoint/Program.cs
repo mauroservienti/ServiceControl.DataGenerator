@@ -8,10 +8,7 @@ var host = Host.CreateDefaultBuilder()
         endpointConfiguration.EnableInstallers();
         
         endpointConfiguration.ApplyCommonTransportConfiguration();
-        
-        endpointConfiguration.AuditProcessedMessagesTo("audit");
-        endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
+        endpointConfiguration.ApplyCommonPlatformConfiguration();
 
         return endpointConfiguration;
     })

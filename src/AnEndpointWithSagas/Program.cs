@@ -6,7 +6,6 @@ var host = Host.CreateDefaultBuilder()
     {
         var endpointConfiguration = new EndpointConfiguration("AnEndpointWithSagas");
         endpointConfiguration.EnableInstallers();
-        endpointConfiguration.AuditSagaStateChanges("Particular.ServiceControl");
 
         endpointConfiguration
             .Recoverability()
@@ -14,10 +13,9 @@ var host = Host.CreateDefaultBuilder()
                 .Delayed(d => d.NumberOfRetries(0));
 
         endpointConfiguration.ApplyCommonTransportConfiguration();
+        endpointConfiguration.ApplyCommonPlatformConfiguration();
+
         endpointConfiguration.UsePersistence<LearningPersistence>();
-        endpointConfiguration.AuditProcessedMessagesTo("audit");
-        endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
 
         return endpointConfiguration;
     })
