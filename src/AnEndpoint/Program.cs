@@ -1,6 +1,5 @@
 ﻿using Messages;
 using Microsoft.Extensions.Hosting;
-using NServiceBus;
 
 var numberOfConversationsToGenerate = 100;
 

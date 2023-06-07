@@ -1,5 +1,4 @@
 ﻿using Messages;
-using NServiceBus;
 
 namespace AnotherEndpoint
 {
