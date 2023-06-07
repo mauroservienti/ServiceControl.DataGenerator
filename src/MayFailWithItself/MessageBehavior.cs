@@ -1,0 +1,5 @@
+﻿enum MessageBehavior
+{
+    Succeed,
+    Fail
+}
