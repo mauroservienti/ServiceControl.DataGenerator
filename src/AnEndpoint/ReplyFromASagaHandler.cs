@@ -6,6 +6,7 @@ namespace AnEndpoint
     {
         public Task Handle(ReplyFromASaga message, IMessageHandlerContext context)
         {
+            RandomFailure.MaybeItFails();
             return context.Reply(new CompleteASaga() { SomeId = message.SomeId });
         }
     }

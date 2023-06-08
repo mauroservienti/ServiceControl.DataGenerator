@@ -1,5 +1,6 @@
 ﻿using Messages;
 using Microsoft.Extensions.Hosting;
+using SharedConfig;
 
 var numberOfConversationsToGenerate = 100;
 
@@ -8,6 +9,8 @@ var host = Host.CreateDefaultBuilder()
     {
         var endpointConfiguration = new EndpointConfiguration("AnEndpoint");
         endpointConfiguration.EnableInstallers();
+
+        endpointConfiguration.DisableRecoverability();
 
         endpointConfiguration.OnEndpointStarted(session =>
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using SharedConfig;
 
 var host = Host.CreateDefaultBuilder()
     .UseNServiceBus(hostBuilderContext =>
@@ -6,10 +7,7 @@ var host = Host.CreateDefaultBuilder()
         var endpointConfiguration = new EndpointConfiguration("AnEndpointWithSagas");
         endpointConfiguration.EnableInstallers();
 
-        endpointConfiguration
-            .Recoverability()
-                .Immediate(i => i.NumberOfRetries(0))
-                .Delayed(d => d.NumberOfRetries(0));
+        endpointConfiguration.DisableRecoverability();
 
         endpointConfiguration.ApplyCommonTransportConfiguration();
         endpointConfiguration.ApplyCommonPlatformConfiguration();
