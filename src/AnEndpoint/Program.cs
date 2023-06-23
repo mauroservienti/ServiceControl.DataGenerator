@@ -1,6 +1,5 @@
 ﻿using Messages;
 using Microsoft.Extensions.Hosting;
-using SharedConfig;
 
 var numberOfConversationsToGenerate = 100;
 

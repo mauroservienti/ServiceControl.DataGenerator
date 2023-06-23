@@ -5,19 +5,14 @@ var host = Host.CreateDefaultBuilder()
     {
         var endpointConfiguration = new EndpointConfiguration("MayFailWithItself");
         endpointConfiguration.EnableInstallers();
-
-        endpointConfiguration
-            .Recoverability()
-                .Immediate(i => i.NumberOfRetries(0))
-                .Delayed(d => d.NumberOfRetries(0));
-
+        endpointConfiguration.DisableRecoverability();
+        endpointConfiguration.ApplyCommonTransportConfiguration();
+        endpointConfiguration.ApplyCommonPlatformConfiguration();
+        
         endpointConfiguration.OnEndpointStarted(session =>
         {
             return session.SendLocal(new ThisIsAMessage() { Behavior = MessageBehavior.Fail });
         });
-
-        endpointConfiguration.ApplyCommonTransportConfiguration();
-        endpointConfiguration.ApplyCommonPlatformConfiguration();
 
         return endpointConfiguration;
     })
