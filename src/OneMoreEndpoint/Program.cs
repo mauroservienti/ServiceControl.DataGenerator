@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Hosting;
-using SharedConfig;
 
 var host = Host.CreateDefaultBuilder()
     .UseNServiceBus(hostBuilderContext =>
