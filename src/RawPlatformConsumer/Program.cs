@@ -12,7 +12,10 @@ var hostSettings = new HostSettings(
     "raw-platform",
     "RawPlatformConsumer",
     new StartupDiagnosticEntries(),
-    (s, exception, cancellationToken) => { },
+    (s, exception, cancellationToken) =>
+    {
+        throw exception;
+    },
     true);
 var receivers = new ReceiveSettings[]
 {
@@ -42,7 +45,7 @@ var transportInfrastructure = await transportDefinition.Initialize(hostSettings,
 Debug.Assert(transportInfrastructure?.Receivers != null, "transportInfrastructure?.Receivers != null");
 foreach (var (key, messageReceiver) in transportInfrastructure.Receivers)
 {
-    messageReceiver?.Initialize(
+    await messageReceiver.Initialize(
         new PushRuntimeSettings(5),
         (context, token) =>
         {
@@ -51,8 +54,16 @@ foreach (var (key, messageReceiver) in transportInfrastructure.Receivers)
         (context, token) =>
         {
             return Task.FromResult(ErrorHandleResult.Handled);
-        });
+        })!;
+    
+    await messageReceiver.StartReceive()!;
 }
 
 await host.RunAsync();
+
+foreach (var (key, messageReceiver) in transportInfrastructure.Receivers)
+{
+    await messageReceiver.StopReceive();
+}
+
 await transportInfrastructure.Shutdown();
