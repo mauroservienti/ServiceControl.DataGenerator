@@ -11,7 +11,7 @@ var host = Host.CreateDefaultBuilder()
         endpointConfiguration.ApplyCommonTransportConfiguration();
         endpointConfiguration.ApplyCommonPlatformConfiguration();
 
-        endpointConfiguration.UsePersistence<LearningPersistence>();
+        endpointConfiguration.ApplyCommonPersistenceConfiguration();
 
         return endpointConfiguration;
     })

@@ -1,8 +1,15 @@
-﻿public static class CommonTransportConfiguration
+﻿using NServiceBus.Transport;
+
+public static class CommonTransportConfiguration
 {
+    public static TransportDefinition GetTransportDefinition()
+    {
+        return new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost");
+    }
+    
     public static RoutingSettings ApplyCommonTransportConfiguration(this EndpointConfiguration endpointConfiguration)
     {
         //return endpointConfiguration.UseTransport(new LearningTransport());
-        return endpointConfiguration.UseTransport(new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost"));
+        return endpointConfiguration.UseTransport(GetTransportDefinition());
     }
 }
