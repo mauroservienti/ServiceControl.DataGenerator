@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Simple system" type="CompoundRunConfigurationType">
+    <toRun name="AnEndpoint" type="DotNetProject" />
+    <toRun name="AnEndpointWithSagas" type="DotNetProject" />
+    <toRun name="AnotherEndpoint" type="DotNetProject" />
+    <toRun name="OneMoreEndpoint" type="DotNetProject" />
+    <method v="2" />
+  </configuration>
+</component>
