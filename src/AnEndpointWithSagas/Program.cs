@@ -5,7 +5,7 @@ var host = Host.CreateDefaultBuilder()
     {
         var endpointConfiguration = new EndpointConfiguration("AnEndpointWithSagas");
         endpointConfiguration.EnableInstallers();
-
+        
         endpointConfiguration.DisableRecoverability();
 
         endpointConfiguration.ApplyCommonTransportConfiguration();

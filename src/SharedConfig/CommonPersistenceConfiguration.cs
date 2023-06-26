@@ -1,3 +1,5 @@
+using NServiceBus;
+
 public static class CommonPersistenceConfiguration
 {
     public static void ApplyCommonPersistenceConfiguration(this EndpointConfiguration endpointConfiguration)

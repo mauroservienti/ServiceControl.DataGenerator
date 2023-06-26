@@ -6,13 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="NServiceBus" Version="8.0.3" />
-    <PackageReference Include="NServiceBus.Extensions.EndpointStarted" Version="2.0.0" />
     <PackageReference Include="NServiceBus.Extensions.Hosting" Version="2.0.0" />
-    <PackageReference Include="NServiceBus.Heartbeat" Version="4.0.0" />
-    <PackageReference Include="NServiceBus.RabbitMQ" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>

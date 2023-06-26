@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using Microsoft.Extensions.Hosting;
-using NServiceBus;
 using NServiceBus.Transport;
 
 var host = Host.CreateDefaultBuilder()

@@ -1,4 +1,6 @@
-﻿public static class PlatfromConnectionConfiguration
+﻿using NServiceBus;
+
+public static class PlatfromConnectionConfiguration
 {
     public static void ApplyCommonPlatformConfiguration(this EndpointConfiguration endpointConfiguration)
     {

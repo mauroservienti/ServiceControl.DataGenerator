@@ -1,4 +1,6 @@
-﻿public static class CommonRecoverabilityConfiguration
+﻿using NServiceBus;
+
+public static class CommonRecoverabilityConfiguration
 {
     public static void DisableRecoverability(this EndpointConfiguration endpointConfiguration)
     {
