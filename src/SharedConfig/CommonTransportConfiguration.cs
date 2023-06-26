@@ -5,9 +5,10 @@ public static class CommonTransportConfiguration
 {
     public static TransportDefinition GetTransportDefinition()
     {
-        return new RabbitMQTransport(RoutingTopology.Conventional(QueueType.Quorum), "host=localhost")
+        var connectionString = @"Server=.;Initial Catalog=ServiceControl.DataGenerator;User Id=SA;Password=YourStrongPassw0rd";
+        return new SqlServerTransport(connectionString)
         {
-            TransportTransactionMode = TransportTransactionMode.TransactionScope
+            TransportTransactionMode = TransportTransactionMode.ReceiveOnly
         };
     }
     
