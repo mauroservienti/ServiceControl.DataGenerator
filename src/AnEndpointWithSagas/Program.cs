@@ -5,6 +5,7 @@ var host = Host.CreateDefaultBuilder()
     {
         var endpointConfiguration = new EndpointConfiguration("AnEndpointWithSagas");
         endpointConfiguration.EnableInstallers();
+        endpointConfiguration.EnableOutbox();
         
         endpointConfiguration.DisableRecoverability();
 
